@@ -1,0 +1,39 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <link rel="stylesheet" type="text/css" href="labRStyle.css" />
+    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="./lib/stopwatch.js"></script>
+
+</head>
+<body> <!-- onload="updateClock(); setInterval('updateClock()', 1000)"-->
+    <!--  <div id="box01" class="jxgbox" style="width:1000; height:500;"></div>
+
+    <script type="text/javascript">
+     var board = JXG.JSXGraph.initBoard('box01', {boundingbox: [-2, 4, 6, -4], axis:true, grid:true});
+    </script> -->
+
+     <div id="Experiment" class="jxgbox" ></div>
+
+    <div id="Instruments">
+        <div id="PowerS" class="jxgbox" ></div>
+        <div id="AmperM" class="jxgbox"> </div>
+        <div id="Timer">
+        <form name="timer">
+            <input type="button" value="Start" onclick="SWatch.start();"> <br/>
+            <input type="button" value="Stop" onclick="SWatch.stop();"> <br/>
+            <input type="button" value="Reset" onclick="SWatch.reset();"> <br/>
+        </form>
+        </div>
+    </div>
+
+    <div id="Graphs">
+        <div id="GraphUI" class="jxgbox" ></div>
+        <div id="GraphR" class="jxgbox" ></div>
+    </div>
+    <script type="text/javascript" src="./labPowerSuply.js"></script>
+
+
+
+
+
+</body>
