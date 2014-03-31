@@ -1,46 +1,52 @@
-<head>
-    <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
-    <link rel="stylesheet" type="text/css" href="./css/labRStyle.css" />
-    <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Sletni laboratorij - merjenje upornosti. </title>
+        <link rel="stylesheet" type="text/css" href="./css/jsxgraph.css" />
+        <link rel="stylesheet" type="text/css" href="./css/labRStyle.css" />
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
 
 
-</head>
-<body> <!-- onload="updateClock(); setInterval('updateClock()', 1000)"-->
-    <!--  <div id="box01" class="jxgbox" style="width:1000; height:500;"></div>
-
-    <script type="text/javascript">
-     var board = JXG.JSXGraph.initBoard('box01', {boundingbox: [-2, 4, 6, -4], axis:true, grid:true});
-    </script> -->
-
-     <div id="Experiment" class="jxgbox" ></div>
-
-    <div id="Instruments">
-        <div id="PowerS" class="jxgbox" ></div>
-        <div id="AmperM" class="jxgbox"> </div>
-        <div id="Timer">
-        <form name="timer">
-            <input type="button" value="Start" onclick="SWatch.start();"> <br/>
-            <input type="button" value="Stop" onclick="SWatch.stop();"> <br/>
-            <input type="button" value="Reset" onclick="SWatch.reset();"> <br/>
-        </form>
+    </head>
+    <body>
+        <div id="Instruments">
+            <div id="Experiment" class="jxgbox" ></div>
+            <div id="PowerS" class="jxgbox"></div>
         </div>
-    </div>
 
-    <div id="Graphs">
-        <div id="GraphUI" class="jxgbox" ></div>
-        <div id="GraphR" class="jxgbox" ></div>
-    </div>
+        <div id="hideOA">
+            <div id="eOptions" class="options"> Možnosti:
+                <form name="mainOptions">
+                    Računalniške meritve:
+                    <input type="button" value="Vklop" onclick="iface.showGraphs();"><br/>
+                </form>
+            </div>
+            <div id="AmperM" class="jxgbox"></div>
+        </div>
 
-    <!-- Including JS Script files-->
-    <script type="text/javascript" src="./lib/stopwatch.js"></script>
-    <script type="text/javascript" src="./js/labMain.js"></script>
-    <script type="text/javascript" src="./js/labPowerSuply.js"></script>
-    <script type="text/javascript" src="./js/labAmperMeter.js"></script>
-    <script type="text/javascript" src="./js/labGraph.js"></script>
+        <div id="Graphs">
+            <div id="GraphU" class="jxgbox" ></div>
+            <div id="GraphI" class="jxgbox" ></div>
+            <div id="GraphOptions" class="options">
+                <div id="Timer">00:00</div>
+                <form name="gTimerButtons">
+                    <input type="button" value="Start" onclick="uiGraphs.start();">
+                    <input type="button" value="Stop" onclick="uiGraphs.stop();">
+                    <input type="button" value="Reset" onclick="uiGraphs.reset();">
+                </form>
+                <br/>
+                <form name="gOptions">
+                    <input type="button" value="Pocisti" onclick="uiGraphs.clear();"><br/>
+                    <input type="button" value="Izklop" onclick="iface.showAM();"><br/>
+                </form>
+            </div>
+            <div id="GraphR" class="jxgbox" ></div>
+        </div>
 
 
 
+        <!-- Including JS Script file-->
+        <script type="text/javascript" src="./js-dest/webLabURI.js"></script>
 
-
-
-</body>
+    </body>
+</html>
