@@ -17,10 +17,7 @@ Interface.prototype.showGraphs = function() {
     //this.uiGraphs = new Graphs();
     this.showHideElmt('hideOA');
     this.showHideElmt('Graphs');
-<<<<<<< HEAD
     this.showHideElmt('big_help');
-=======
->>>>>>> 32fdb7aa8f61333c32773ec67f6c311e767f03d5
     self.uiCollectData.createGraphs();
 };
 
@@ -28,7 +25,6 @@ Interface.prototype.showAM = function() {
     this.showHideElmt('hideOA');
     this.showHideElmt('Graphs');
     //self.uiCollectData.deleteGraphs();
-<<<<<<< HEAD
 };
 
 //Show small_help
@@ -39,8 +35,6 @@ Interface.prototype.showSmallHelp = function() {
 //Show big_help
 Interface.prototype.showBigHelp = function() {
     this.showHideElmt('big_help');
-=======
->>>>>>> 32fdb7aa8f61333c32773ec67f6c311e767f03d5
 };
 
 
