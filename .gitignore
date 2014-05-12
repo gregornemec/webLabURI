@@ -1,6 +1,19 @@
+Gruntfile.js
+browser.json
+images_bk/
+js-src/.emacs.desktop
+js-src/.emacs.desktop.lock
+js-src/labMain.backup
+js-src/labTmp
+labExample.js
+measurData/
+node_modules/
+package.json
+syncFileList.txt
+labRTest.html
 labPowerSuply
-.tern-project
-images/
+.tern*
 lib/
+.#*
 *~
 

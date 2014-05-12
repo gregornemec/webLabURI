@@ -47,7 +47,7 @@ var self = this;
 var uiAmpermeter = new AmperMeter();
 var uiCollectData = new CollectData();
 var iface = new Interface();
-var uiPowerSupply = new PowerSupply(uiAmpermeter.amText, uiGraphs);
+var uiPowerSupply = new PowerSupply(uiAmpermeter.amText, uiCollectData);
 var uiExperiment = new Experiment(uiPowerSupply);
 
 

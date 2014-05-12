@@ -6,13 +6,13 @@ Interface.prototype.showGraphs = function() {
     //this.uiGraphs = new Graphs();
     this.showHideElmt('hideOA');
     this.showHideElmt('Graphs');
-    self.uiGraphs.createGraphs();
+    self.uiCollectData.createGraphs();
 };
 
 Interface.prototype.showAM = function() {
     this.showHideElmt('hideOA');
     this.showHideElmt('Graphs');
-    //self.uiGraphs.deleteGraphs();
+    //self.uiCollectData.deleteGraphs();
 };
 
 

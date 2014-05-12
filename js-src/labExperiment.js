@@ -52,7 +52,7 @@ function Experiment (pwrs) {
         size: 10,
         fixed: true,
         fillOpacity: 0,
-        strokeOpacity: 1,
+        strokeOpacity: 0,
         name: "",
         visible: true,
         showInfoBox: false
@@ -64,8 +64,9 @@ function Experiment (pwrs) {
 
     //Creating 100Ohm Resistor
     this.r100 = new Resistor( "R100",
-                              100,   //Resistance from mesurment data!?
-                              10,
+                              //Resistance value from linear fit.
+                              function (voltage) {return voltage/94.53;},
+                              6.2,
                               expBoard,
                               expBG,
                               './images/r100B.png',
@@ -80,8 +81,8 @@ function Experiment (pwrs) {
 
     //Creating 500Ohm Resistor
     this.r500 = new Resistor( "R500",
-                              500,   //Resistance from mesurment data!?
-                              10,
+                              function (voltage) {return voltage/472.9;},
+                              6.5,
                               expBoard,
                               expBG,
                               './images/r500B.png',
@@ -152,6 +153,10 @@ function Experiment (pwrs) {
                              circuitAttrPoint
                            );
     this.b12.setImageFileList(
+        'bullb12V/bullb12V_croped000.jpg',
+        'bullb12V/bullb12V_croped001.jpg',
+        //'bullb12V/bullb12V_croped002.jpg',
+        //'bullb12V/bullb12V_croped003.jpg',
         'bullb12V/bullb12V_croped004.jpg',
         //'bullb12V/bullb12V_croped005.jpg',
         //'bullb12V/bullb12V_croped006.jpg',
