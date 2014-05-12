@@ -1,66 +1,123 @@
-
-#Experiment {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  width: 640px;
-  height: 480px;
-
-
+body {
+  margin: 10px;
+  background-color:white;
 }
 
+.options {
+  padding: 10px;
+  border: blue;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+
+}
 
 #Instruments {
-  position: absolute;
-  left: 10px;
-  top: 500px;
-
+  float: left;
+  /*left: 10px;
+  margin: 10px;*/
 }
 
-#PowerS {
- 
+#Experiment {
   float: left;
-  /*margin: 10px;*/
-  width: 320px;
-  height: 150px;
+  /*left: 10px;
+  //top: 10px; */
+  width: 640px;
+  height: 457px;
+}
+
+
+#PowerS {
+  clear: both;
+  width: 640px;
+  height: 276;
+}
+
+#hideOA {
+  float: left; 
+  display: block;
+}
+
+#eOptions {
+  margin: auto;
+  float: left;
+  display: block;
+  
 }
 
 #AmperM {
- 
-  float: left;
-  /*margin: 10px;*/
-  width: 150px;
-  height: 150px;
+  display: block;
+  clear: both;
+  width: 209px;
+  height: 360px;
 }
 
-#Timer {
- 
-  float: left;
-  /*margin: 10px;*/
-  width: 50px;
-  height: 150px;
+input[type = button] {
+  width: 60px;
+  height: 20px;
 }
-
 
 
 #Graphs {
-  position: absolute;
-  left: 660px;
-  top:  10px ;
-
+/*  position: absolute;
+  left: 655px;
+  top:  5px ; */
+  float: left;
+  display: none;
+  width: 735;
+  height: 735;
 }
 
-#GraphUI {
+#GraphU {
   float: left;
- /* margin: 10px;*/
-  width: 400px;
-  height: 320px;
+  width: 365px;
+  height: 365px;
+}
+
+#GraphI {
+  float: left;
+  width: 365px;
+  height: 365px;
+}
+
+#GraphOptions {
+  text-align: center;
+  float: left;
+  width: 210px;
+  /*height: 356px;*/
+    
+}
+
+#Timer {
+  text-align: center;
+  font-size: 60px;
+  font-style: normal;
 }
 
 #GraphR {
-  clear: both;
- /* margin: 10px;*/
-  width: 400;
-  height: 320px;
+  
+  float: left;
+  width: 500px;
+  height: 365px;
 }
+
+#small_help {
+  left: 40px;
+  top: 30px;
+  position: absolute;
+  align: center;
+  z-index: 100;
+  display: block;
+}
+
+#big_help {
+  left: 45px;
+  top: 35px;
+  position: absolute;
+  align: center;
+  z-index: 100;
+  display: none;
+}
+
+
 

@@ -41,6 +41,9 @@ function PowerSupply (am, graphs) {
 
     this.i = 0;
 
+    //Msg Report once
+    this.msgV01RO = false;
+
     var currentAngle;
 
     //Image paths for power supply
@@ -101,7 +104,7 @@ function PowerSupply (am, graphs) {
 
 
     //Arc on points psP01, psP02, ps03 for psGlider. psGlider on cicrle is for rotation of power button;
-    var psArc = psBoard.create('arc', [psP02, psP01, psP03], {visible: true});
+    var psArc = psBoard.create('arc', [psP02, psP01, psP03], {visible: false});
     //var psCircle = psBoard.create('circle', [psP02, psP01], {visible: true});
     //var psGlider = psBoard.create('glider', [7.90, 2.82, psCircle], {color: 'green', opacity: 0.5}); //Original positio ToDo: Implement offset!
 
@@ -111,6 +114,7 @@ function PowerSupply (am, graphs) {
 
     var psGlider = psBoard.create('glider', [7.41, 2.29, psArc],
                                   { name: '',
+                                    size: 5,
                                     color: 'green',
                                     opacity: 0.5,
                                     lable: false,
@@ -167,6 +171,18 @@ function PowerSupply (am, graphs) {
         //console.log("isOn: " + this.isPsOn);
         if ((this.currentResistor != undefined) && this.isPsOn && (this.currentResistor.isDestroyed == false)) {
 
+            //Voltage alert!
+            /*
+            if ((this.currentVoltage >= (this.currentResistor.uMax - this.currentResistor.uMax*0.2))
+                && (this.msgV01RO == false))  {
+                alert("Pozor zmanjšajte napetost! Napetost nesme presegati " + this.currentResistor.uMax.toFixed(2) + ".");
+                powerOff();
+                this.msgV01RO = true;
+            }
+
+             */
+
+
             if (this.currentVoltage >= this.currentResistor.uMax) {
                 this.currentResistor.destroyeR();
                 this.brakeCircuit();
@@ -174,41 +190,10 @@ function PowerSupply (am, graphs) {
                 return;
             }
 
-            //console.log("Current resistor in circuit: " +  this.currentResistor.name);
-            //var i = 0;
-            if (this.currentResistor.mData.length == 0)  {
-                this.currentCurrent = this.currentVoltage/this.currentResistor.resistance;
-            }
-            else {
-                // console.log("CV: " + this.currentVoltage);
-                // console.log("MV: " + this.currentResistor.mData[this.i].U);
-
-                if (this.currentVoltage > 0) {
-
-                    while(this.currentVoltage > this.currentResistor.mData[this.i].U) {
-                        //console.log("iUp");
-                        this.i++;
-                    }
-
-                    while(this.currentVoltage < this.currentResistor.mData[this.i].U) {
-                        //console.log("iDown");
-                        this.i--;
-                    }
-                    //               console.log(this.i + ": " + this.currentResistor.mData[this.i].I);
-                }
-/*
-toDo: Izboljsanje prikaza meritev predvsem vmesnih vrednosti
-
-                var data01 = this.currentResistor.mData[this.i + 1];
-                var data02 = this.currentResistor.mData[this.i];
-                var calcResistenc = (Math.abs(data02.U - data01.U))/(Math.abs(data02.I - data01.I));
-                console.log("tmp Resist: " +  calcResistenc);
-                //this.currentCurrent = this.currentVoltage/calcResistenc;
-*/
-                this.currentCurrent = this.currentResistor.mData[this.i].I;
-            }
+            this.currentCurrent = this.currentResistor.resistance(this.currentVoltage);
 
             this.graphs.setCurrentVoltage(this.currentVoltage);
+
             this.graphs.setCurrentCurrent(this.currentCurrent);
             this.amperText.setText((this.currentCurrent).toFixed(3));
 
@@ -217,13 +202,7 @@ toDo: Izboljsanje prikaza meritev predvsem vmesnih vrednosti
                     this.currentResistor.animate(this.currentResistor.uMax * 10, this.currentVoltage * 10);
                 }
             }
-        //console.log(currentResistor);
         }
-        else {
-
-        }
-
-
     }, this);
 
     //Mouse down event for power button on button coordinates.
@@ -305,7 +284,7 @@ toDo: Izboljsanje prikaza meritev predvsem vmesnih vrednosti
         //console.log("CR: " + self.currentResistor.resistance);
         if (self.currentResistor != undefined) {
             self.connectCircuit();
-            self.currentCurrent = self.currentVoltage/self.currentResistor.resistance;
+            self.currentCurrent =  self.currentResistor.resistance(self.currentVoltage);
         }
 
     }
@@ -373,6 +352,7 @@ PowerSupply.prototype.getGraphColor = function() {
 
 PowerSupply.prototype.setCurrentResistor = function(resistor) {
     this.currentResistor = resistor;
+    this.msgV01RO = false;
 };
 
 PowerSupply.prototype.brakeCircuit = function() {
@@ -401,8 +381,9 @@ PowerSupply.prototype.connectCircuit = function() {
             return;
         }
 
-        this.amperText.setText((this.currentVoltage/this.currentResistor.resistance).toFixed(3));
-        this.currentCurrent = this.currentVoltage/this.currentResistor.resistance;
+
+        this.currentCurrent =  this.currentResistor.resistance(this.currentVoltage);
+        this.amperText.setText(this.currentCurrent.toFixed(3));
         this.currentResistor.putBullb();
         this.graphs.setCurrentVoltage(this.currentVoltage);
         this.graphs.setCurrentCurrent(this.currentCurrent);

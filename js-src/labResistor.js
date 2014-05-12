@@ -30,7 +30,7 @@ function Resistor (name, R, uMax, board, boardBG, rImage,
                    gColor, pX, pY, sW, sH, pwrs, ap) {
 
     this.name = name;
-    this.resistance = R;
+    this.R = R;
     this.uMax = uMax;
     this.board = board;
     this.boardBG = boardBG;
@@ -45,6 +45,9 @@ function Resistor (name, R, uMax, board, boardBG, rImage,
     this.isBullb = false;
     this.isDestroyed = false;
     this.prevGliderValue = 0;
+
+    // index of measurment data!
+    this.mIdx = 0;
 }
 
 //Cachin images for animation and setting paths to image files
@@ -84,10 +87,9 @@ Resistor.prototype.createAnimeImages = function() {
 
 Resistor.prototype.animate = function(gMax, gValue) {
 
-    //Setting Image/Bullb Powe <-> U|Potential
+    //Setting Image/Bullb Power <-> U|Potential
     var gliderMax = gMax;
-    var gliderPart =
-  gliderMax/(this.rBGImgs.length - 1);
+    var gliderPart =  gliderMax/(this.rBGImgs.length - 1);
 
     var index = Math.floor(gValue/gliderPart);
 
@@ -164,7 +166,46 @@ Resistor.prototype.readMeasurData = function() {
     };
 
     this.uMax = this.mData[this.mData.length-1].U;
-    console.log(this.uMax);
+
+    //resistance override when using measurment data!
+
+    this.R = function (voltage) {
+        var R = 0;
+        var U1, U2, I1, I2 = 0;
+
+        if (voltage > 0) {
+            console.log(this.mIdx);
+            while ((voltage > this.mData[this.mIdx].U) && (this.mIdx < this.mData.length)) {
+                this.mIdx++;
+            }
+
+            while ((voltage < this.mData[this.mIdx].U) && (this.mIdx > 0)) {
+                this.mIdx--;
+            }
+            console.log(this.mIdx);
+        }
+
+        console.log("U:" + this.mData[this.mIdx].U);
+        console.log("I:" + this.mData[this.mIdx].I);
+
+        if ((this.mIdx >= 0) && (this.mIdx < this.mData.length)) {
+            U1 = this.mData[this.mIdx].U;
+            I1 = this.mData[this.mIdx].I;
+        }
+
+       // if ((this.mIdx+1 >= 0) && (this.mIdx+1 < this.mData.length)) {
+         //   U2 = this.mData[this.mIdx+1].U;
+           // I2 = this.mData[this.mIdx+1].I;
+        //}
+
+
+        //R = (U2 - U1)/(I2 - I1);
+        R = U1/I1;
+        console.log("R:" + R);
+        return voltage/R;
+
+       // return this.mData[this.mIdx].I;
+    };
 };
 
 
@@ -224,7 +265,7 @@ Resistor.prototype.createResistor = function() {
                                                 size: 10,
                                                 fixed: true,
                                                 fillOpacity: 0,
-                                                strokeOpacity: 1,
+                                                strokeOpacity: 0,
                                                 name: "",
                                                 visible: true,
                                                 showInfoBox: false
@@ -317,6 +358,10 @@ Resistor.prototype.createResistor = function() {
     this.board.update();
 };
 
+Resistor.prototype.resistance = function(voltage) {
+    return this.R(voltage);
+};
+
 
 //Support methodes
 
@@ -361,13 +406,7 @@ Resistor.prototype.getR = function() {
     return this.resistance;
 };
 
-Resistor.prototype.changeOpacity = function(transpar) {
-    this.rImg.setAttribute({opacity: transpar});
 
-    //this.rImg.updateRenderer();
-    console.log(transpar);
-    //this.rImg.update();
-};
 
 
 

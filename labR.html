@@ -4,11 +4,15 @@
         <title>Sletni laboratorij - merjenje upornosti. </title>
         <link rel="stylesheet" type="text/css" href="./css/jsxgraph.css" />
         <link rel="stylesheet" type="text/css" href="./css/labRStyle.css" />
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
+        <!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script> -->
+        <!--  <script type="text/javascript" src="./js-src/lib/jsxgraphcore.js"></script> -->
 
 
     </head>
     <body>
+        <img id="small_help" src="./images/help/small_help.png"/>
+        <img id="big_help" src="./images/help/big_help.png"/>
+
         <div id="Instruments">
             <div id="Experiment" class="jxgbox" ></div>
             <div id="PowerS" class="jxgbox"></div>
@@ -19,6 +23,8 @@
                 <form name="mainOptions">
                     Računalniške meritve:
                     <input type="button" value="Vklop" onclick="iface.showGraphs();"><br/>
+                    Prikaži pomoč:
+                    <input type="button" value="Pomoč" onclick="iface.showSmallHelp();"><br/>
                 </form>
             </div>
             <div id="AmperM" class="jxgbox"></div>
@@ -30,14 +36,15 @@
             <div id="GraphOptions" class="options">
                 <div id="Timer">00:00</div>
                 <form name="gTimerButtons">
-                    <input type="button" value="Start" onclick="uiGraphs.start();">
-                    <input type="button" value="Stop" onclick="uiGraphs.stop();">
-                    <input type="button" value="Reset" onclick="uiGraphs.reset();">
+                    <input type="button" value="Start" onclick="uiCollectData.start();">
+                    <input type="button" value="Stop" onclick="uiCollectData.stop();">
+                    <input type="button" value="Reset" onclick="uiCollectData.reset();">
                 </form>
                 <br/>
                 <form name="gOptions">
-                    <input type="button" value="Pocisti" onclick="uiGraphs.clear();"><br/>
+                    <input type="button" value="Počisti" onclick="uiCollectData.clear();"><br/>
                     <input type="button" value="Izklop" onclick="iface.showAM();"><br/>
+                    <input type="button" value="Pomoč" onclick="iface.showBigHelp();"><br/>
                 </form>
             </div>
             <div id="GraphR" class="jxgbox" ></div>
