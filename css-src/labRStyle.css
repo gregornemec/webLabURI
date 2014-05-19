@@ -16,6 +16,10 @@ body {
 #links { 
 }
 
+#header_bg {
+  left: -20px
+}
+
 #pw_link {
   left: 500px;
   top: 75px;
