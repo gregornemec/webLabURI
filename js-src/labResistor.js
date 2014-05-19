@@ -257,7 +257,6 @@ Resistor.prototype.createResistor = function() {
                                   });
 
     //Crating starting base point
-
     this.attrStartPoint = this.board.create('point',
                                             [this.getCenterOfImage(this.startPosition)],
                                             {
